@@ -1,0 +1,5 @@
+Bundle-Name: journal-article-custom-comparator
+Bundle-SymbolicName: com.mw.journal.article.custom.comparator
+Bundle-Version: 1.0.0
+Fragment-Host: com.liferay.journal.service
+Export-Package: com.mw.comparator
