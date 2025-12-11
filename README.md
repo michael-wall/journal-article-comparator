@@ -1,7 +1,19 @@
 ## Introduction ##
-- This module contains 2 custom comparator classes for Journal Article that expose a default constructor to be compatible with Journal Article JSONWS +orderByComparator request parameter syntax.
-  - com.mw.comparator.ArticleCreateDateAscComparator
+- This module contains 2 custom comparator classes for Journal Article that expose a default constructor to be compatible with Journal Article JSONWS +orderByComparator request parameter syntax:
+	- com.mw.comparator.ArticleCreateDateAscComparator
 	- com.mw.comparator.ArticleCreateDateDescComparator
+- The absence of a default constructor in the OOTB Journal Article comparators causes the following exception when one is used in this scenario:
+```
+2025-12-10 17:12:08.020 DEBUG [http-nio-8080-exec-10][JSONWebServiceServiceAction:120] com.liferay.journal.util.comparator.ArticleDisplayDateComparator
+java.lang.InstantiationException: com.liferay.journal.util.comparator.ArticleDisplayDateComparator
+        at java.lang.Class.newInstance(Class.java:719)
+...
+...
+...
+Caused by: java.lang.NoSuchMethodException: com.liferay.journal.util.comparator.ArticleDisplayDateComparator.<init>()
+        at java.lang.Class.getConstructor0(Class.java:3761)
+        at java.lang.Class.newInstance(Class.java:706)
+```
 - It also has Fragment-Host: com.liferay.journal.service set in bnd.bnd to attach it to the journal service to resolve class path issues.
 - To use with JSONWS endpoints the classes MUST be whitelisted in the jsonws.web.service.parameter.type.whitelist.class.names portal property.
   - Copy the OOTB property value from tomcat\webapps\ROOT\WEB-INF\shielded-container-lib\portal-impl.jar > portal.properties.
